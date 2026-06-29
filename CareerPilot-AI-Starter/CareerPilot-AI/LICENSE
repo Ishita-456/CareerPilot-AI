@@ -1,0 +1,37 @@
+
+## Future Enhancements
+
+- Resume upload & ATS analysis
+- Company-specific preparation
+- Progress tracking
+- Coding platform integration
+- Calendar reminders
+
+## Author
+
+**Ishita Ghayade**
+"""
+
+(base/"README.md").write_text(readme,encoding="utf-8")
+(base/"LICENSE").write_text("""MIT License
+
+Copyright (c) 2026 Ishita Ghayade
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files to deal in the Software
+without restriction, including without limitation the rights to use, copy,
+modify, merge, publish, distribute, sublicense, and/or sell copies.""",encoding="utf-8")
+
+docs={
+"Architecture.md":"# CareerPilot AI Architecture\n\nStudent -> CareerPilot AI -> Knowledge Base -> Personalized Career Report.",
+"Workflow.md":"# Workflow\n\nInput -> Profile Analysis -> Skill Gap -> Roadmap -> Projects -> Interview Prep -> Placement Readiness -> Mission Card.",
+"Project_Report.md":"# Project Report\n\n## Problem\nStudents lack personalized placement guidance.\n\n## Solution\nCareerPilot AI provides AI-powered mentoring using IBM Watson Orchestrate.\n\n## Impact\nReduces preparation effort while improving structured learning."
+}
+for name,content in docs.items():
+    (base/"docs"/name).write_text(content,encoding="utf-8")
+    try:
+        pypandoc.convert_text(content,'pdf',format='md',outputfile=str(base/"docs"/name.replace(".md",".pdf")),extra_args=['--standalone'])
+    except Exception:
+        pass
+
+print(base)
